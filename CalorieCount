@@ -1,0 +1,21 @@
+import json  //json is a module
+def get_calories_per_food(food):
+  """Gets the calories per serving of a food."""
+  with open("food_calories.json", "r") as f:
+    food_calories = json.load(f)
+  return food_calories[food]
+def calculate_calorie_count(meal):
+  """Calculates the calorie count of a meal."""
+  calorie_count = 0
+  for food in meal:
+    calories_per_serving = get_calories_per_food(food)
+    serving_size = float(input("Enter the serving size of {} (in grams): ".format(food)))
+    calorie_count += calories_per_serving * serving_size / 100
+  return calorie_count
+def main():
+  """The main function."""
+  meal = ["apple", "banana", "bread"]
+  calorie_count = calculate_calorie_count(meal)
+  print("The calorie count of your meal is: {} calories".format(calorie_count))
+if __name__ == "__main__":
+  main()
